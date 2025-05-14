@@ -1,17 +1,14 @@
 package com.ringle.ringleclassbookingservice.persist.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name = "CLASS_RESERVATION")
 public class ClassReservation {
@@ -41,4 +38,12 @@ public class ClassReservation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tutor_availability_id", nullable = false)
     private TutorAvailability tutorAvailability;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status;
+
+    public enum Status {
+        RESERVED, CANCELLED
+    }
 }
