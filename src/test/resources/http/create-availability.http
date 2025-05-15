@@ -1,0 +1,71 @@
+### 수업 가능 시간 등록 (성공)
+POST http://localhost:8080/api/tutor/availability
+Content-Type: application/json
+
+{
+  "email": "john.smith@harvard.edu",
+  "startTime": "2025-05-20T11:00:00"
+}
+
+### 튜터가 존재하지 않음 (실패)
+POST http://localhost:8080/api/tutor/availability
+Content-Type: application/json
+
+{
+  "email": "tutor@example.com",
+  "startTime": "2025-05-20T11:00:00"
+}
+
+### 잘못된 시간 (15분 단위)
+POST http://localhost:8080/api/tutor/availability
+Content-Type: application/json
+
+{
+  "email": "john.smith@harvard.edu",
+  "startTime": "2025-05-20T13:15:00"
+}
+
+### 이미 존재하는 시각
+POST http://localhost:8080/api/tutor/availability
+Content-Type: application/json
+
+{
+  "email": "john.smith@harvard.edu",
+  "startTime": "2025-05-20T13:00:00"
+}
+
+### Email이 공란인 경우
+POST http://localhost:8080/api/tutor/availability
+Content-Type: application/json
+
+{
+  "email": "",
+  "startTime": "2025-05-20T13:00:00"
+}
+
+### startTime이 공란인 경우
+POST http://localhost:8080/api/tutor/availability
+Content-Type: application/json
+
+{
+  "email": "john.smith@harvard.edu",
+  "startTime": ""
+}
+
+### startTime, email 모두 공란인 경우
+POST http://localhost:8080/api/tutor/availability
+Content-Type: application/json
+
+{
+  "email": "",
+  "startTime": ""
+}
+
+### email이 바르지 않은 양식인 경우
+POST http://localhost:8080/api/tutor/availability
+Content-Type: application/json
+
+{
+  "email": "tutor@",
+  "startTime": "2025-05-20T13:00:00"
+}
